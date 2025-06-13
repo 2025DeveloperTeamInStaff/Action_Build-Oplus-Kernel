@@ -223,7 +223,7 @@ jobs:
        
       - name: Apply HMBird GKI patch
         run: |
-         cd kernel_workspace/kernel_platform/common/drivers
+         cd $GITHUB_WORKSPACE/kernel_workspace/kernel_platform/common/drivers
          cat << 'EOF' > hmbird_patch.c
          #include <linux/init.h>
          #include <linux/module.h>
