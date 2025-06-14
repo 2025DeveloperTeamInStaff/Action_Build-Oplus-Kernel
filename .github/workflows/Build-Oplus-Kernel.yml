@@ -301,7 +301,14 @@ jobs:
          cd ../../../
          git add -A
          git commit -m "Add HMBird GKI patch" || true
-         
+
+      - name: Configure Docker
+        run: |
+          cd "$COMMON_DIR"
+          git clone https://github.com/tomxi1997/lxc-docker-support-for-android utils
+          echo 'source "utils/Kconfig"'
+          patch -p1 utils/fix_cgroup.patch
+          
       - name: Configure kernel # 配置内核
         run: |
           cd "$WORKSPACE"
@@ -328,6 +335,7 @@ jobs:
           echo "正在更新KernelSU 内核配置..."
           echo "CONFIG_KSU=y" >> "$DEFCONFIG"
           echo "CONFIG_KPM=y" >> "$DEFCONFIG"
+          echo "CONFIG_DOCKER=y" >> "$DEFCONFIG"
           echo "CONFIG_KSU_SUSFS_SUS_SU=${{ inputs.VFS == 'enable' && 'n' || 'y' }}" >> "$DEFCONFIG"
           echo "CONFIG_KSU_MANUAL_HOOK=${{ inputs.VFS == 'enable' && 'y' || 'n' }}" >> "$DEFCONFIG"
 
