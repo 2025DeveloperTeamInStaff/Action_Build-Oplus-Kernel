@@ -73,6 +73,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Parse VERSION input # 解析 VERSION 输入
         run: |
