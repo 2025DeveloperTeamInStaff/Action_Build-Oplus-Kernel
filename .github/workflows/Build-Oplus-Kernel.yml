@@ -306,8 +306,8 @@ jobs:
         run: |
           cd "$COMMON_DIR"
           git clone https://github.com/tomxi1997/lxc-docker-support-for-android utils
-          echo 'source "utils/Kconfig"'
-          patch -p1 utils/fix_cgroup.patch
+          echo 'source "utils/Kconfig"' >> Kconfig
+          patch -p1 < utils/fix_cgroup.patch
           
       - name: Configure kernel # 配置内核
         run: |
