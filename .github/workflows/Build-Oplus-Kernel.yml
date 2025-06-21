@@ -328,6 +328,8 @@ jobs:
           sed -i '/KMI_GENERATION/s/-$oki_infix//g' "$PLATFORM/build/kernel/kleaf/impl/stamp.bzl"
           sed -i 's/^\(CONFIG_LOCALVERSION="[^"]*\)"/\1-Lotus"/' "$DEFCONFIG"
 
+          sed -i 's/\(CONFIG_CMDLINE=".*\)kvm-arm.mode=protected\(.*"\)/\1kvm-arm.mode=nvhe\2/' "$DEFCONFIG"
+          
           # Replace kernel name strings
           #echo "正在设置内核名称..."
           #sed -i '$s|echo "\$res"|echo "\${{ inputs.KERNEL_NAME }}"|' "$COMMON/scripts/setlocalversion"
